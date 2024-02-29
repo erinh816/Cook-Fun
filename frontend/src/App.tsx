@@ -2,6 +2,7 @@ import {useState, FormEvent, ChangeEvent} from 'react';
 import "./App.css";
 import * as api from './api';
 import {Recipe} from './types';
+import RecipeCard from './components/RecipeCard';
 
 
 function App() {
@@ -39,15 +40,13 @@ function App() {
         </input>
         <button type="submit">Submit</button>
       </form>
+      
   
       {recipes.map((recipe)=>(
-        <div>
-          <p>{recipe.title}</p>
-          <img src={recipe.image}/>
-        </div>
+          <RecipeCard recipe={recipe}/>
       ))}
     </div>
   )
 }
 
-export default App
+export default App;
