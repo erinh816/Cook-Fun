@@ -1,11 +1,11 @@
-import {useState, FormEvent} from 'react';
+import {useState, FormEvent, ChangeEvent} from 'react';
 import "./App.css";
 import * as api from './api';
 import {Recipe} from './types';
 
 
 function App() {
-  const [searchTerm, setSearchTerm] = useState("burgers");
+  const [searchTerm, setSearchTerm] = useState<string>("");
   //the results from calling api is an array of a bunch of recipe objects, so we initialize the recipes as empty array
   const [recipes, setRecipes] = useState<Recipe[]>([])
 
@@ -21,17 +21,29 @@ function App() {
     }
   }
 
+  // function onChange(evt:ChangeEvent<HTMLInputElement>){
+  //   setSearchTerm(evt.target.value)
+  // }
 
 
   return(
     <div>
       <form onSubmit={handleSearchSubmit}>
-      <button type="submit">Submit</button>
+        <input type="text" 
+               required
+               placeholder = "Enter a search term ..."
+               value = {searchTerm}
+               onChange = {(event)=>setSearchTerm(event.target.value)}
+              //  onChange = {onChange}
+               >
+        </input>
+        <button type="submit">Submit</button>
       </form>
-      <p>hello</p>
+  
       {recipes.map((recipe)=>(
         <div>
           <p>{recipe.title}</p>
+          <img src={recipe.image}/>
         </div>
       ))}
     </div>
