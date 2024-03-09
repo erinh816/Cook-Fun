@@ -25,6 +25,10 @@ function App() {
   // function onChange(evt:ChangeEvent<HTMLInputElement>){
   //   setSearchTerm(evt.target.value)
   // }
+  function handleViewMoreClick(){
+    //get offset number, ex:page is 2, offset is 20
+    //add functionality to skip 20 and load 10 more?
+  }
 
 
   return(
@@ -45,6 +49,8 @@ function App() {
       {recipes.map((recipe)=>(
           <RecipeCard recipe={recipe}/>
       ))}
+
+      <button className="view-more-button" onClick={handleViewMoreClick}>View More</button>
     </div>
   )
 }
