@@ -29,9 +29,7 @@ app.get("/api/recipes/:id/summary", async(req, res)=>{
   //id will be passed down from click
   const recipeId = req.params.id;
 
-  const response = await fetch(`https://api.spoonacular.com/recipes/${recipeId}/summary?apiKey=${apiKey}`);
-
-  const result = await response.json();
+  const result = await RecipeAPI.getRecipeSummary(recipeId);
 
   return res.json(result)
 })
