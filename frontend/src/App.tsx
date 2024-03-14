@@ -19,61 +19,43 @@ function App() {
     evt.preventDefault();
     try{
       // const recipes = await api.searchRecipes(searchTerm,1);
-      const response = await api.searchRecipes(searchTerm,1);
+      const response = await api.searchRecipes(searchTerm, 1);
       // setRecipes(recipes.results);
       setRecipes(response.results);
     }catch(error){
       console.log(error)
     }
   }
-/** 
+ 
   // function onChange(evt:ChangeEvent<HTMLInputElement>){
   //   setSearchTerm(evt.target.value)
   // }
   async function handleViewMoreClick(){
     //get offset number, ex:page is 2, offset is 20
-    //add functionality to skip 20 and load 10 more?
+    //how to get page number? we need to keep track of page which starts with 1 hardcoded
 
     //call search recipe API, pass in the query and current page
+    console.log('what is the pagenumber to start with', pageNumber)
     const nextPage = pageNumber.current + 1;
+    console.log('next page is:', nextPage)
 
     try{
-      // const nextRecipes = await api.searchRecipes(searchTerm, nextPage);
-      // console.log('nextrecipes value is', nextRecipes.results)
-      // //so next we will use 
-      // setRecipes([...recipes, ...nextRecipes])
-      // console.log("check current recipes",recipes)
+
 
       const response = await api.searchRecipes(searchTerm, nextPage);
     // Extract the results array from the response
-    const nextRecipes = response.results;
+      const nextRecipes = response.results;
 
     // Update the recipes state by concatenating the existing recipes with the new ones
-    setRecipes([...recipes, ...nextRecipes]);
-      console.log("check current recipes",recipes)
+      setRecipes([...recipes, ...nextRecipes]);
+      
+      pageNumber.current = nextPage;
+      
     }catch(error){
       console.log(error)
     }
 
   }
-  */
-  async function handleViewMoreClick() {
-    const nextPage = pageNumber.current + 1;
-
-    try {
-        const response = await api.searchRecipes(searchTerm, nextPage);
-        const nextRecipes = response.results;
-
-        setRecipes([...recipes, ...nextRecipes]);
-        console.log('current current wowowow', recipes)
-    } catch (error) {
-        console.log(error);
-    }
-}
-
-useEffect(() => {
-    console.log("check current recipes", recipes);
-}, [recipes]);
 
 
   return(
