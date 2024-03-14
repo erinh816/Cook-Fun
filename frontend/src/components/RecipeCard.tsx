@@ -4,8 +4,15 @@ interface Props {
     recipe: Recipe
 }
 
+
 const RecipeCard = ({recipe}:Props) => {
 
+    //add handle click card here because  we have access to recipe.id
+
+    //with the method added to api.ts, we can call it inside handle click function, return the result
+
+    //reder the result in a modal(could be a child component of RecipeCard)
+    
     return (
         <div className="recipe-card">
             <img src={recipe.image}/>

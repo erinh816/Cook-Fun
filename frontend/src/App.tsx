@@ -22,6 +22,8 @@ function App() {
       const response = await api.searchRecipes(searchTerm, 1);
       // setRecipes(recipes.results);
       setRecipes(response.results);
+      //this one is not necessary?
+      pageNumber.current = 1;
     }catch(error){
       console.log(error)
     }

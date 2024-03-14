@@ -11,6 +11,8 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
+const apiKey = process.env.API_KEY;
+
 
 app.get("/api/recipes/search", async(req, res)=>{
   // res.json({message:'success!'})
@@ -21,6 +23,17 @@ app.get("/api/recipes/search", async(req, res)=>{
   const results = await RecipeAPI.searchRecipes(searchTerm, page);
   
   return res.json(results)
+})
+
+app.get("/api/recipes/:id/summary", async(req, res)=>{
+  //id will be passed down from click
+  const recipeId = req.params.id;
+
+  const response = await fetch(`https://api.spoonacular.com/recipes/${recipeId}/summary?apiKey=${apiKey}`);
+
+  const result = await response.json();
+
+  return res.json(result)
 })
 
 app.listen(5000, ()=>{
