@@ -51,12 +51,10 @@ export const getRecipeSummary = async (recipeId:string) => {
   url.search = new URLSearchParams(params).toString();
 
   try{
-    const searchResponse = await fetch(url);
-    const resultsJson = await searchResponse.json();
-    return resultsJson;
-  }catch(error){
+    const response = await fetch(url);
+    const result = await response.json();
+    return result;
+   }catch(error){
     console.log(error)
-  }
-  
-
+   }
 }

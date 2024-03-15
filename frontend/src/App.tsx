@@ -3,14 +3,19 @@ import "./App.css";
 import * as api from './api';
 import {Recipe} from './types';
 import RecipeCard from './components/RecipeCard';
+import RecipeModal from './components/RecipeModal';
 
 
 function App() {
   const [searchTerm, setSearchTerm] = useState<string>("");
   //the results from calling api is an array of a bunch of recipe objects, so we initialize the recipes as empty array
-  const [recipes, setRecipes] = useState<Recipe[]>([])
+  const [recipes, setRecipes] = useState<Recipe[]>([]);
 
   const pageNumber = useRef(1);
+
+  //for the modal
+  //why do we want to have selected recipe as state(kinda a status for show/hide modal)
+  const [selectedRecipe, setSelectedRecipe] = useState<Recipe | undefined>(undefined);
 
  
 
@@ -80,8 +85,17 @@ function App() {
       ))}
 
       <button className="view-more-button" onClick={handleViewMoreClick}>View More</button>
+
+      {selectedRecipe ? <RecipeModal id={selectedModal.id}/> : null}
     </div>
   )
 }
 
 export default App;
+
+//selectedModal state controls show/hide modal
+// app.tsx renders Card and Modal component
+   //Card: onClick is on Card component to setSelectedModal state to on/off
+   //Modal: <RecipeModal id={selectedModal.id}/>
+
+//To figure out: can we just render modal from card?
