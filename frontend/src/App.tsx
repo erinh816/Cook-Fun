@@ -85,7 +85,7 @@ function App() {
 
       <button className="view-more-button" onClick={handleViewMoreClick}>View More</button>
 
-      {selectedRecipe ? <RecipeModal /> : null}
+      {selectedRecipe ? <RecipeModal recipeId={selectedRecipe.id.toString()}/> : null}
     </div>
   );
 }
