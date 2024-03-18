@@ -80,12 +80,12 @@ function App() {
       
   
       {recipes.map((recipe)=>(
-          <RecipeCard recipe={recipe} onClick={()=>setSelectedRecipe(recipe)}/>
+          <RecipeCard recipe={recipe} clickCard={()=>setSelectedRecipe(recipe)}/>
       ))}
 
       <button className="view-more-button" onClick={handleViewMoreClick}>View More</button>
 
-      {selectedRecipe ? <RecipeModal recipeId={selectedRecipe.id.toString()}/> : null}
+      {selectedRecipe ? <RecipeModal recipeId={selectedRecipe.id.toString()} closeModal={()=>setSelectedRecipe(undefined)}/> : null}
     </div>
   );
 }

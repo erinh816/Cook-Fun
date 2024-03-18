@@ -3,10 +3,11 @@ import {useState, useEffect} from 'react';
 import * as api from '../api';
 
 interface Props {
-    recipeId: string
+    recipeId: string;
+    closeModal:()=>void;
 }
 
-const RecipeModal = ({recipeId}:Props) => {
+const RecipeModal = ({recipeId, closeModal}:Props) => {
     const [recipeSummary, setRecipeSummary] = useState<RecipeSummary>();
     
     useEffect(()=>{
@@ -38,7 +39,7 @@ const RecipeModal = ({recipeId}:Props) => {
             <div className="modal-content">
                 <div className="modal-header">
                     <h2>{recipeSummary.title}</h2>
-                    <span className="close-btn">&times;</span>
+                    <span className="close-btn" onClick={closeModal}>&times;</span>
                 </div>
                 <p>summary</p>
                 <p dangerouslySetInnerHTML={{__html:recipeSummary.summary}}></p>
