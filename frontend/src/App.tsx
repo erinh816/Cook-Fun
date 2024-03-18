@@ -64,7 +64,6 @@ function App() {
 
   }
 
-
   return(
     <div>
       <form onSubmit={handleSearchSubmit}>
@@ -81,14 +80,14 @@ function App() {
       
   
       {recipes.map((recipe)=>(
-          <RecipeCard recipe={recipe}/>
+          <RecipeCard recipe={recipe} onClick={()=>setSelectedRecipe(recipe)}/>
       ))}
 
       <button className="view-more-button" onClick={handleViewMoreClick}>View More</button>
 
-      {selectedRecipe ? <RecipeModal id={selectedModal.id}/> : null}
+      {selectedRecipe ? <RecipeModal /> : null}
     </div>
-  )
+  );
 }
 
 export default App;
@@ -96,6 +95,11 @@ export default App;
 //selectedModal state controls show/hide modal
 // app.tsx renders Card and Modal component
    //Card: onClick is on Card component to setSelectedModal state to on/off
-   //Modal: <RecipeModal id={selectedModal.id}/>
+   //Modal: <RecipeModal id={selectedModal.id}/>, decided by the selectedModal's state
 
-//To figure out: can we just render modal from card?
+//question?? onClick function pass down to RecipeCard component and not used in that component?
+
+//improvement idea:
+  //after clicking the card, open a brand new page with name, image and summary
+  //or just flip the card in place, front is the picture, back is the summary
+    //add isFlipped state to card component, if flipped, render summary, or render name and image
