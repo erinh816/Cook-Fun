@@ -17,6 +17,11 @@ const apiKey = process.env.API_KEY;
 
 /**
  * Return recipes from searching a specific searchTerm from Spoonacular API
+ * Return {
+ *   "results": [
+ *   {}, {}, {} ...
+ *  ]
+ * }
  */
 app.get("/api/recipes/search", async(req, res)=>{
   // res.json({message:'success!'})
@@ -31,6 +36,11 @@ app.get("/api/recipes/search", async(req, res)=>{
 
 /**
  * Return recipe summary from Spoonacular API with a specific id
+ * Return {
+ *   "id": ,
+ *   "title": "",
+ *   "summary": ""
+ * }
  */
 app.get("/api/recipes/:id/summary", async(req, res)=>{
   //id will be passed down from click
@@ -43,8 +53,13 @@ app.get("/api/recipes/:id/summary", async(req, res)=>{
 
 /**
  * add recipe to favorites
+ * Return {
+	"id": 3,
+	"recipeId": 715538
+}
  */
 app.post("/api/recipes/favorites", async(req,res)=>{
+  //recipeId is a column in data table, when client send request body, we need to make it to have this column name so we can save/delete it from the data table(schema.prisma) 
   const recipeId = req.body.recipeId;
 
   try{
@@ -60,6 +75,50 @@ app.post("/api/recipes/favorites", async(req,res)=>{
     console.log(error);
     //we don't want to return the error to the front end, it might contain sensitive information
     return res.status(500).json({error:"Oops, something went wrong"})
+  }
+})
+
+/**
+ * Get all favorite recipes 
+ * Return {
+ *   "results":[{}, {}, {}...]
+ * }
+ */
+app.get("/api/recipes/favorites", async(req,res)=>{
+  try{
+    //based on doc, allFabRecipes is an [] of {}s, and it only has id and recipeId in it
+    const allFavRecipes = await prismaClient.favoriteRecipes.findMany();
+
+    //allFavRecipesIds is an []
+    const allFavRecipesIds = allFavRecipes.map((recipe)=>recipe.recipeId.toString());
+
+    const favorites = await RecipeAPI.getFavoriteRecipesByIds(allFavRecipesIds);
+      
+    return res.json(favorites);
+
+  }catch(error){
+    console.log(error)
+    return res.status(500).json({error:"Oops, something went wrong"})
+  }
+})
+
+/**
+ * Delete a recipe from favorites
+ */
+app.delete("/api/recipes/favorites", async(req,res)=>{
+  const recipeId = req.body.recipeId;
+
+  try{
+    const deleteRecipe = await prismaClient.favoriteRecipes.delete({
+      where: {
+        recipeId: recipeId,
+      },
+    })
+
+    return res.send("Record is successful deleted");
+
+  }catch(error){
+    console.log(error)
   }
 })
 
