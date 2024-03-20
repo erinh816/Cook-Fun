@@ -97,8 +97,8 @@ app.get("/api/recipes/favorites", async(req,res)=>{
     return res.json(favorites);
 
   }catch(error){
-    console.log(error)
-    return res.status(500).json({error:"Oops, something went wrong"})
+    console.log(error);
+    return res.status(500).json({error:"Oops, something went wrong"});
   }
 })
 
@@ -114,11 +114,13 @@ app.delete("/api/recipes/favorites", async(req,res)=>{
         recipeId: recipeId,
       },
     })
-
-    return res.send("Record is successful deleted");
+ 
+    return res.status(204).send()
+    // return res.send("Record is successful deleted");
 
   }catch(error){
     console.log(error)
+    return res.status(500).json({error:"Oops, something went wrong"})
   }
 })
 

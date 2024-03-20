@@ -38,3 +38,10 @@ font-family:Verdana, Geneva, Tahoma, sans-serif
 .close-btn {
   cursor:pointer;
 }
+
+
+.tabs {
+  display:flex;
+  gap:2em;
+  cursor:pointer;
+}
