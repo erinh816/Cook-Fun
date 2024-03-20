@@ -19,6 +19,23 @@ function App() {
   const [selectedRecipe, setSelectedRecipe] = useState<Recipe | undefined>(undefined);
   const [selectedTab, setSelectedTab] = useState<Tabs>("search");
 
+  const [favs, setFavs] = useState<Recipe[]>([]);
+
+  useEffect(() => {
+    const fetchFavoriteRecipes = async () => {
+      try {
+
+        const favoriteRecipes = await api.getFavoriteRecipes();
+        setFavs(favoriteRecipes);
+
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchFavoriteRecipes();
+  }, []);
+
 
   /* for seperate of concerns, the fetch functionality */
   const handleSearchSubmit = async (evt: FormEvent) => {
@@ -26,6 +43,7 @@ function App() {
     try {
       // const recipes = await api.searchRecipes(searchTerm,1);
       const response = await api.searchRecipes(searchTerm, 1);
+      console.log("what is my response?", response);
       // setRecipes(recipes.results);
       setRecipes(response.results);
       //this one is not necessary?
@@ -61,6 +79,7 @@ function App() {
     }
   }
 
+
   return (
     <div>
       <div className="tabs">
@@ -91,9 +110,9 @@ function App() {
       )}
 
       {selectedTab === "favorites" && (
-        <>
-          This is the fav
-        </>
+        <div>
+          {favs.map((recipe) => <RecipeCard recipe={recipe} clickCard={() => setSelectedRecipe(recipe)} />)}
+        </div>
       )}
 
       {selectedRecipe ? <RecipeModal recipeId={selectedRecipe.id.toString()} closeModal={() => setSelectedRecipe(undefined)} /> : null}
