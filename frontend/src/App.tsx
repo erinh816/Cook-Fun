@@ -26,7 +26,9 @@ function App() {
       try {
 
         const favoriteRecipes = await api.getFavoriteRecipes();
-        setFavs(favoriteRecipes);
+        //bug
+        //without .results can't map
+        setFavs(favoriteRecipes.results);
 
       } catch (error) {
         console.log(error);
@@ -79,7 +81,7 @@ function App() {
     }
   }
 
-
+  console.log("what is in my favs", favs);
   return (
     <div>
       <div className="tabs">
