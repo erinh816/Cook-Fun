@@ -26,8 +26,8 @@ function App() {
       try {
 
         const favoriteRecipes = await api.getFavoriteRecipes();
-        //bug
         //without .results can't map
+
         setFavs(favoriteRecipes.results);
 
       } catch (error) {
@@ -130,9 +130,20 @@ export default App;
 //Card: onClick is on Card component to setSelectedModal state to on/off
 //Modal: <RecipeModal id={selectedModal.id}/>, decided by the selectedModal's state
 
-//question?? onClick function pass down to RecipeCard component and not used in that component?
+
 
 //improvement idea:
 //after clicking the card, open a brand new page with name, image and summary
 //or just flip the card in place, front is the picture, back is the summary
 //add isFlipped state to card component, if flipped, render summary, or render name and image
+
+
+
+//the logic(myself) to add functionality to heart icon
+// same event handler to the favs.map and recipes.map, clickHeart = {handleClickHeart(recipe.id)}, something like this
+// pass it down to recipeCard component, render it with an onClick event handler
+// in App.tsx, code the handleClickHeart function
+//add a state [added, setAdded] = useState (false)
+//inside of function, call api.add and set state to true
+//inside of function, call api.remove and set state to true
+// add post and delete requests to api.ts so I can use them with api.add and api.remove in last step

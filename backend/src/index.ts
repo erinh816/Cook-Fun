@@ -59,9 +59,9 @@ app.get("/api/recipes/:id/summary", async(req, res)=>{
 }
  */
 app.post("/api/recipes/favorites", async(req,res)=>{
-  //recipeId is a column in data table, when client send request body, we need to make it to have this column name so we can save/delete it from the data table(schema.prisma) 
+  //recipeId on the right side could be anything, it just decides the post request body has to have it as key
   const recipeId = req.body.recipeId;
-
+ console.log('what is req.body',req.body); //{recipeId: 715538}
   try{
     const favoriteRecipe = await prismaClient.favoriteRecipes.create(
       {
