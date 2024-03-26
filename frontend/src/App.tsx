@@ -4,6 +4,7 @@ import * as api from './api';
 import { Recipe } from './types';
 import RecipeCard from './components/RecipeCard';
 import RecipeModal from './components/RecipeModal';
+import { AiOutlineSearch } from "react-icons/ai";
 
 //why don't we have this in types file?
 type Tabs = "search" | "favorites";
@@ -110,10 +111,20 @@ function App() {
   console.log("what is in my favs", favs);
 
   return (
-    <div>
+    <div className="app-container">
+
+      <div className="header">
+        <img src="/egg.jpg"></img>
+        <div className="title"><img className="nood" src="/noodgif.gif"></img>Cook Fun</div>
+      </div>
+
       <div className="tabs">
-        <h1 onClick={() => setSelectedTab("search")}> Search Recipe </h1>
-        <h1 onClick={() => setSelectedTab("favorites")}> Favorites </h1>
+        <h1
+          className={selectedTab === "search" ? "tab-active" : ""}
+          onClick={() => setSelectedTab("search")}> Search Recipe </h1>
+        <h1
+          className={selectedTab === "favorites" ? "tab-active" : ""}
+          onClick={() => setSelectedTab("favorites")}> Favorites </h1>
       </div>
 
       {selectedTab === "search" && (
@@ -127,33 +138,35 @@ function App() {
             //  onChange = {onChange}
             >
             </input>
-            <button type="submit">Submit</button>
+            <button type="submit"><AiOutlineSearch size={40} /></button>
           </form>
 
           {/* {recipes.map((recipe) => (
             <RecipeCard recipe={recipe} clickCard={() => setSelectedRecipe(recipe)} onFavButtonClick={addFavoriteRecipe} />
           ))} */}
+          <div className="recipe-grid">
+            {recipes.map((recipe) => {
+              //map through favs, if any match, return true
+              //pass true/false down to child component to control heart
+              const isFav = favs.some((favRecipe) => recipe.id === favRecipe.id);
+              return (
+                <RecipeCard
+                  recipe={recipe}
+                  clickCard={() => setSelectedRecipe(recipe)}
+                  onFavButtonClick={isFav ? removeFavoriteRecipe : addFavoriteRecipe}
+                  isFav={isFav} />
+              );
+            })}
 
+          </div>
 
-          {recipes.map((recipe) => {
-            //map through favs, if any match, return true
-            //pass true/false down to child component to control heart
-            const isFav = favs.some((favRecipe) => recipe.id === favRecipe.id);
-            return (
-              <RecipeCard
-                recipe={recipe}
-                clickCard={() => setSelectedRecipe(recipe)}
-                onFavButtonClick={isFav ? removeFavoriteRecipe : addFavoriteRecipe}
-                isFav={isFav} />
-            );
-          })}
 
           <button className="view-more-button" onClick={handleViewMoreClick}>View More</button>
         </>
       )}
 
       {selectedTab === "favorites" && (
-        <div>
+        <div className="recipe-grid">
           {favs.map((recipe) =>
             <RecipeCard
               recipe={recipe}
@@ -183,31 +196,3 @@ export default App;
 //after clicking the card, open a brand new page with name, image and summary
 //or just flip the card in place, front is the picture, back is the summary
 //add isFlipped state to card component, if flipped, render summary, or render name and image
-
-
-
-//the logic(myself) to add functionality to heart icon
-// same event handler to the favs.map and recipes.map, clickHeart = {handleClickHeart(recipe.id)}, something like this
-// pass it down to recipeCard component, render it with an onClick event handler
-// in App.tsx, code the handleClickHeart function
-//add a state [added, setAdded] = useState (false)
-//inside of function, call api.add and set state to true
-//inside of function, call api.remove and set state to true
-// add post and delete requests to api.ts so I can use them with api.add and api.remove in last step
-//---
-//tutorial's 
-//add function takes the whole recipe instead of recipe.id, and add(recipes.map)/remove(favs.map) this recipe to favs directly
-//then add conditional variable true/false to recipes.map to check if recipe is in favs to update heart fill, pass the variable value to recipe card component
-//inside of recipecard component, conditionally render filled heart or outlined heart
-//for favs.map, the variable is always true
-
-
-
-//next step: fill out onFavButtonClick = {()=>func}
-//this func will call delete, add to api.ts
-//update favs array
-//add this function to favs.map
-
-//an issue came up, heart/unheart in fav tab works fine following above
-//but can't unheart a recipe in search recipe tab
-//need to add a condition to also run the delete function in recipes.map
