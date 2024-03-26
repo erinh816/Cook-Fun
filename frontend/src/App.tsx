@@ -86,8 +86,8 @@ function App() {
       //post this parameter recipe to db
       await api.addFavoriteRecipe(recipe);
 
-      //add it to favs state
-      // setFavs([...favs, recipe]);
+      //necessary!add it to favs state so UI immediately update because setState triggers rerendering
+      setFavs([...favs, recipe]);
 
     } catch (error) {
       console.log(error);
@@ -117,9 +117,23 @@ function App() {
             <button type="submit">Submit</button>
           </form>
 
-          {recipes.map((recipe) => (
+          {/* {recipes.map((recipe) => (
             <RecipeCard recipe={recipe} clickCard={() => setSelectedRecipe(recipe)} onFavButtonClick={addFavoriteRecipe} />
-          ))}
+          ))} */}
+
+
+          {recipes.map((recipe) => {
+            //map through favs, if any match, return true
+            //pass true/false down to child component to control heart
+            const isFav = favs.some((favRecipe) => recipe.id === favRecipe.id);
+            return (
+              <RecipeCard
+                recipe={recipe}
+                clickCard={() => setSelectedRecipe(recipe)}
+                onFavButtonClick={addFavoriteRecipe}
+                isFav={isFav} />
+            );
+          })}
 
           <button className="view-more-button" onClick={handleViewMoreClick}>View More</button>
         </>
@@ -127,7 +141,13 @@ function App() {
 
       {selectedTab === "favorites" && (
         <div>
-          {favs.map((recipe) => <RecipeCard recipe={recipe} clickCard={() => setSelectedRecipe(recipe)} onFavButtonClick={() => undefined} />)}
+          {favs.map((recipe) =>
+            <RecipeCard
+              recipe={recipe}
+              clickCard={() => setSelectedRecipe(recipe)}
+              onFavButtonClick={() => undefined}
+              //always true
+              isFav={true} />)}
         </div>
       )}
 
@@ -163,3 +183,4 @@ export default App;
 // add post and delete requests to api.ts so I can use them with api.add and api.remove in last step
 //---
 //tutorial's add function takes the whole recipe instead of recipe.id, and add(recipes.map)/remove(favs.map) this recipe to favs directly
+//then add conditional to recipes.map to check if recipe is in favs to update heart fill
