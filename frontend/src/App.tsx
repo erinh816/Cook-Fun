@@ -182,5 +182,14 @@ export default App;
 //inside of function, call api.remove and set state to true
 // add post and delete requests to api.ts so I can use them with api.add and api.remove in last step
 //---
-//tutorial's add function takes the whole recipe instead of recipe.id, and add(recipes.map)/remove(favs.map) this recipe to favs directly
-//then add conditional to recipes.map to check if recipe is in favs to update heart fill
+//tutorial's 
+//add function takes the whole recipe instead of recipe.id, and add(recipes.map)/remove(favs.map) this recipe to favs directly
+//then add conditional variable true/false to recipes.map to check if recipe is in favs to update heart fill, pass the variable value to recipe card component
+//inside of recipecard component, conditionally render filled heart or outlined heart
+//for favs.map, the variable is always true
+
+
+
+//next step: fill out onFavButtonClick = {()=>func}
+//this func will call delete, add to api.ts
+//update favs array
