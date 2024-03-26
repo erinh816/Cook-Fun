@@ -63,3 +63,26 @@ export const addFavoriteRecipe = async (recipe: Recipe) => {
 
   //we don't need to return anything, no error means post good
 }
+
+
+//delete a recipe from fav
+export const removeFavoriteRecipe = async (recipe: Recipe) => {
+  const baseUrl = new URL("http://localhost:5000/api/recipes/favorites");
+
+  const body = {
+    recipeId:recipe.id
+  }
+
+  const response = await fetch(baseUrl, {
+    method: "DELETE",
+    headers: {
+      "Content-Type":"application/json"
+    },
+    body:JSON.stringify(body)
+  });
+
+  if(!response.ok){
+    throw new Error(`HTTP error! Status: ${response.status}`)
+  }
+
+}

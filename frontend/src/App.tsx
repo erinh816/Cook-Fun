@@ -94,6 +94,19 @@ function App() {
     }
   };
 
+  const removeFavoriteRecipe = async (recipe: Recipe) => {
+    try {
+      //delete this parameter recipe from db
+      await api.removeFavoriteRecipe(recipe);
+
+      setFavs(favs.filter((favRecipe) => favRecipe.id !== recipe.id));
+
+    } catch (error) {
+      console.log(error);
+    }
+
+  };
+
   console.log("what is in my favs", favs);
 
   return (
@@ -130,7 +143,7 @@ function App() {
               <RecipeCard
                 recipe={recipe}
                 clickCard={() => setSelectedRecipe(recipe)}
-                onFavButtonClick={addFavoriteRecipe}
+                onFavButtonClick={isFav ? removeFavoriteRecipe : addFavoriteRecipe}
                 isFav={isFav} />
             );
           })}
@@ -145,7 +158,7 @@ function App() {
             <RecipeCard
               recipe={recipe}
               clickCard={() => setSelectedRecipe(recipe)}
-              onFavButtonClick={() => undefined}
+              onFavButtonClick={removeFavoriteRecipe}
               //always true
               isFav={true} />)}
         </div>
@@ -193,3 +206,8 @@ export default App;
 //next step: fill out onFavButtonClick = {()=>func}
 //this func will call delete, add to api.ts
 //update favs array
+//add this function to favs.map
+
+//an issue came up, heart/unheart in fav tab works fine following above
+//but can't unheart a recipe in search recipe tab
+//need to add a condition to also run the delete function in recipes.map
