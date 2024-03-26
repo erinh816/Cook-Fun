@@ -4,10 +4,11 @@ import { AiOutlineHeart } from "react-icons/ai";
 interface Props {
     recipe: Recipe;
     clickCard: () => void;
+    onFavButtonClick: (recipe: Recipe) => void;
 }
 
 
-const RecipeCard = ({ recipe, clickCard }: Props) => {
+const RecipeCard = ({ recipe, clickCard, onFavButtonClick }: Props) => {
 
     //add handle click card here because we have access to recipe.id
 
@@ -19,7 +20,11 @@ const RecipeCard = ({ recipe, clickCard }: Props) => {
         <div className="recipe-card" onClick={clickCard}>
             <img src={recipe.image} />
             <div className="recipe-card-title">
-                <span>
+                <span onClick={(event) => {
+                    //because of the nested onClick event, with this code, when we click on this specific element, it'll ignore the outer onClick
+                    event.stopPropagation();
+                    onFavButtonClick(recipe);
+                }}>
                     <AiOutlineHeart size={25} />
                 </span>
                 <h3>{recipe.title}</h3>

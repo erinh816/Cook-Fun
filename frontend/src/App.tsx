@@ -81,7 +81,21 @@ function App() {
     }
   }
 
+  const addFavoriteRecipe = async (recipe: Recipe) => {
+    try {
+      //post this parameter recipe to db
+      await api.addFavoriteRecipe(recipe);
+
+      //add it to favs state
+      // setFavs([...favs, recipe]);
+
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   console.log("what is in my favs", favs);
+
   return (
     <div>
       <div className="tabs">
@@ -104,7 +118,7 @@ function App() {
           </form>
 
           {recipes.map((recipe) => (
-            <RecipeCard recipe={recipe} clickCard={() => setSelectedRecipe(recipe)} />
+            <RecipeCard recipe={recipe} clickCard={() => setSelectedRecipe(recipe)} onFavButtonClick={addFavoriteRecipe} />
           ))}
 
           <button className="view-more-button" onClick={handleViewMoreClick}>View More</button>
@@ -113,7 +127,7 @@ function App() {
 
       {selectedTab === "favorites" && (
         <div>
-          {favs.map((recipe) => <RecipeCard recipe={recipe} clickCard={() => setSelectedRecipe(recipe)} />)}
+          {favs.map((recipe) => <RecipeCard recipe={recipe} clickCard={() => setSelectedRecipe(recipe)} onFavButtonClick={() => undefined} />)}
         </div>
       )}
 
@@ -147,3 +161,5 @@ export default App;
 //inside of function, call api.add and set state to true
 //inside of function, call api.remove and set state to true
 // add post and delete requests to api.ts so I can use them with api.add and api.remove in last step
+//---
+//tutorial's add function takes the whole recipe instead of recipe.id, and add(recipes.map)/remove(favs.map) this recipe to favs directly
