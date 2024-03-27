@@ -8,6 +8,7 @@ body {
   height:100vh;
   background-color:rgb(237, 250, 250);
   background-image: url('public/cute.gif');
+  
   /* Set background size to cover the entire body */
   /* background-size: cover; */
   /* Center the background image */
@@ -33,6 +34,9 @@ form {
   background-color:white;
   align-items:center;
   border-radius:1em;
+  border: 4px rgb(223, 115, 7) solid;
+  border-style:double;
+  border-width:10px;
 }
 
 input {
@@ -40,6 +44,7 @@ input {
   font-size:2em;
   flex:1;
   border:none;
+  
   border-radius:1em;
 }
 
@@ -71,6 +76,7 @@ button {
   position:relative;
   cursor:pointer;
   gap:1.5em;
+  border-radius:1em;
 }
 
 .recipe-card h3 {
@@ -93,6 +99,8 @@ button {
   font-weight:bold;
   margin:auto;
   border-radius:1em;
+  background-color:rgb(223, 115, 7);
+  color:white;
 }
 
 .header {
@@ -167,6 +175,13 @@ button {
   display:flex;
   gap:2em;
   cursor:pointer;
+}
+
+.tabs h1 {
+  background-color:rgb(223, 115, 7);
+  color:white;
+  padding:0.5em;
+  border-radius:1em;
 }
 
 .recipe-card-title {
