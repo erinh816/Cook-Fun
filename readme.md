@@ -1,8 +1,8 @@
-# Recipe Searching Website
+# Cook Fun 🍔
 
 This project is a recipe searching website developed using Express, Prisma, TypeScript, and SQL, integrated with the Spooncular API. It allows users to search for recipes, read recipe summaries, and save or unsave recipes for later reference.
 
-## Features
+## 🍔 Features
 
 - **Search:** Users can search for recipes using keywords or ingredients.
 - **Recipe Summary:** Detailed information about each recipe, including ingredients, instructions, and nutritional information, is provided. You can check it out by clicking the recipe card.
