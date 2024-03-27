@@ -1,14 +1,14 @@
-# Cook Fun 🍔
+# 🍔 Cook Fun 🍔
 
 This project is a recipe searching website developed using Express, Prisma, TypeScript, and SQL, integrated with the Spooncular API. It allows users to search for recipes, read recipe summaries, and save or unsave recipes for later reference.
 
-## 🍔 Features
+## 🍕 Features
 
 - **Search:** Users can search for recipes using keywords or ingredients.
 - **Recipe Summary:** Detailed information about each recipe, including ingredients, instructions, and nutritional information, is provided. You can check it out by clicking the recipe card.
 - **Save/Unsave Recipe:** Users can save their favorite recipes to their profile for easy access later by clicking the heart icon on each recipe card.
 
-## Technologies Used
+## 🍕 Technologies Used
 
 - **Express:** Backend framework for handling server-side logic and API requests.
 - **Prisma:** Database ORM for interacting with the SQL database.
@@ -16,7 +16,7 @@ This project is a recipe searching website developed using Express, Prisma, Type
 - **SQL:** Structured Query Language for managing and querying the database.
 - **Spooncular API:** External API for retrieving recipe data and information.
 
-## Technologies Used
+## 🍕 Technologies Used
 
 - **Frontend:**
 
@@ -46,7 +46,7 @@ This project is a recipe searching website developed using Express, Prisma, Type
   - GitHub
   - Visual Studio Code
 
-## Installation and Setup
+## 🍕 Installation and Setup
 
 1. Clone the repository: `git clone <repository-url>`
 2. Install dependencies: `npm install`
@@ -54,15 +54,15 @@ This project is a recipe searching website developed using Express, Prisma, Type
 4. Run the server: `npm start`
 5. Run the fronend: `npm run dev`
 
-## Usage
+## 🍕 Usage
 
 1. Access the website in your browser.
 2. Use the search bar to search for recipes.
 3. Click on a recipe to view its details.
 4. Save or unsave recipes by clicking the appropriate button.
 
-## Contributing
+## 🍕 Contributing
 
 Contributions are welcome! Please fork the repository and submit a pull request with your changes.
 
-## License
+## 🍕 License
