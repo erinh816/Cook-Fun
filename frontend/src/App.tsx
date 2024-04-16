@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, FormEvent, ChangeEvent } from 'react';
+import { useState, useRef, useEffect, FormEvent } from 'react';
 import "./App.css";
 import * as api from './api';
 import { Recipe } from './types';
@@ -59,6 +59,8 @@ function App() {
   // function onChange(evt:ChangeEvent<HTMLInputElement>){
   //   setSearchTerm(evt.target.value)
   // }
+  //above needs to import ChangeEvent
+
   async function handleViewMoreClick() {
     //get offset number, ex:page is 2, offset is 20
     //how to get page number? we need to keep track of page which starts with 1 hardcoded
