@@ -1,5 +1,5 @@
 # 🍔 Cook Fun 🍔
-
+Try it out: https://cook-fun.netlify.app/
 This project is a recipe searching website developed using Express, Prisma, TypeScript, and SQL, integrated with the Spooncular API. It allows users to search for recipes, read recipe summaries, and save or unsave recipes for later reference.
 <img width="1554" alt="Screenshot 2024-04-05 at 4 26 05 PM" src="https://github.com/erinh816/Cook-Fun/assets/39861374/dcb44a8a-268f-4ba3-8a1f-659072bc5b88">
 
