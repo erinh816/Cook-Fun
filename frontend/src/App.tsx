@@ -1,5 +1,8 @@
 import { useState, useRef, useEffect, FormEvent } from 'react';
 import "./App.css";
+import "./styles/title.css";
+import "./styles/rainbow.css";
+
 import * as api from './api';
 import { Recipe } from './types';
 import RecipeCard from './components/RecipeCard';
@@ -38,7 +41,6 @@ function App() {
 
     fetchFavoriteRecipes();
   }, []);
-
 
   /* for seperate of concerns, the fetch functionality */
   const handleSearchSubmit = async (evt: FormEvent) => {
@@ -112,12 +114,56 @@ function App() {
 
   console.log("what is in my favs", favs);
 
+  /***** Cook Fun title animation */
+  // useEffect(() => {
+  //   // moved the scripts/title.js functionality in here because it didn't work
+  //   const spans = document.querySelectorAll('.word span');
+
+  //   spans.forEach((span, idx) => {
+  //     span.addEventListener('click', (e) => {
+  //       e.target.classList.add('active');
+  //     });
+  //     span.addEventListener('animationend', (e) => {
+  //       e.target.classList.remove('active');
+  //     });
+
+  //     // Initial animation
+  //     setTimeout(() => {
+  //       span.classList.add('active');
+  //     }, 750 * (idx + 1));
+  //   });
+  // }, []);
+  /*** title animation ends */
+
+
   return (
     <div className="app-container">
 
       <div className="header">
-        <img src="/egg.jpg"></img>
-        <div className="title"><img className="nood" src="/noodgif.gif"></img>Cook Fun</div>
+        <img src="lemon.jpg"></img>
+        <div className="title"><img className="nood" src="/noodgif.gif"></img>
+          {/* <div className="word">
+            <span>C</span>
+            <span>O</span>
+            <span>O</span>
+            <span>K</span>
+            <span className="spacer"></span>
+            <span>F</span>
+            <span>U</span>
+            <span>N</span>
+          </div> */}
+          <ul className="c-rainbow">
+            <li className="c-rainbow__layer c-rainbow__layer--white">COOK FUN</li>
+            <li className="c-rainbow__layer c-rainbow__layer--orange">COOK FUN</li>
+            <li className="c-rainbow__layer c-rainbow__layer--red">COOK FUN</li>
+            <li className="c-rainbow__layer c-rainbow__layer--violet">COOK FUN</li>
+            <li className="c-rainbow__layer c-rainbow__layer--blue">COOK FUN</li>
+            <li className="c-rainbow__layer c-rainbow__layer--green">COOK FUN</li>
+            <li className="c-rainbow__layer c-rainbow__layer--yellow">COOK FUN</li>
+          </ul>
+
+
+        </div>
       </div>
 
       <div className="tabs">
