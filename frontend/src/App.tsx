@@ -186,7 +186,7 @@ function App() {
             //  onChange = {onChange}
             >
             </input>
-            <button type="submit"><AiOutlineSearch size={40} /></button>
+            <button type="submit"><AiOutlineSearch size={40} color="rgb(188, 145, 102)" /></button>
           </form>
 
           {/* {recipes.map((recipe) => (
